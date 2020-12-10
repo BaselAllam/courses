@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:courses/homepage.dart';
+import 'package:courses/screens/homepage.dart';
 
 
 void main() => runApp(MyApp());

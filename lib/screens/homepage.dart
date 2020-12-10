@@ -1,5 +1,5 @@
+import 'package:courses/widgets/item.dart';
 import 'package:flutter/material.dart';
-
 
 
 
@@ -9,6 +9,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+List image = [
+  'assets/pic1.png', 'assets/pic2.png', 'assets/pic3.png',
+  'assets/pic4.png', 'assets/pic5.png', 'assets/pic6.png',
+];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,9 +63,36 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
+            scrollHeader('Studying'),
+            Container(
+              height: MediaQuery.of(context).size.height/2.5,
+              child: scrollItem(true),
+            ),
+            scrollHeader('New Courses'),
+            Container(
+              height: MediaQuery.of(context).size.height/2.5,
+              child: scrollItem(false),
+            ),
           ],
         ),
       ),
     );
   }
+  scrollHeader(String title) {
+    return ListTile(
+      title: Text(
+        title,
+        style: TextStyle(color: Colors.black, fontSize: 20.0, fontWeight: FontWeight.normal)
+      ),
+    );
+  }
+  scrollItem(bool studying) {
+    return ListView.builder(
+      scrollDirection: Axis.horizontal,
+      itemCount: image.length,
+      itemBuilder: (context, index){
+        return Item(image[index], studying);
+      },
+    );
+  }  
 }
