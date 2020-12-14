@@ -1,3 +1,4 @@
+import 'package:courses/screens/bottomnavbar/searchresult.dart';
 import 'package:courses/widgets/item.dart';
 import 'package:flutter/material.dart';
 
@@ -61,6 +62,9 @@ List image = [
                   ),
                   child: Icon(Icons.search, color: Colors.white, size: 20.0)
                 ),
+                onTap: () {
+                  return Navigator.push(context, MaterialPageRoute(builder: (_){return SearchResult();}));
+                },
               ),
             ),
             scrollHeader('Studying'),
