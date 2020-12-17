@@ -1,4 +1,4 @@
-import 'package:courses/screens/bottomnavbar/searchresult.dart';
+import 'package:courses/screens/searchresult.dart';
 import 'package:courses/widgets/item.dart';
 import 'package:flutter/material.dart';
 
