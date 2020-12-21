@@ -1,3 +1,4 @@
+import 'package:courses/screens/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:courses/screens/bottomnavbar/bottomnavbar.dart';
 
@@ -74,17 +75,36 @@ class _LoginState extends State<Login> {
                               ),
                             );
                           } else {
-                            return Navigator.pushNamed(context, 'bottomNavBar');
-                            // return Navigator.pushReplacement(context,
-                            //     MaterialPageRoute(builder: (_) {
-                            //   return BottomNavBar();
-                            // }));
+                            return Navigator.pushReplacement(context,
+                                MaterialPageRoute(builder: (_) {
+                              return BottomNavBar();
+                            }));
                           }
                         },
                       );
                     },
                   ),
                 ],
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Row(
+                  children: [
+                    Text(
+                        'Don\'t have an account ?!  ',
+                        style: TextStyle(height: 2.0, fontWeight: FontWeight.bold, fontSize: 20.0, ),
+                      ),
+                    InkWell(
+                      onTap: () {
+                        return Navigator.push(context, MaterialPageRoute(builder: (_) {return SignUp();}));
+                      },
+                      child: Text(
+                        'Sign Up',
+                        style: TextStyle(height: 2.0, fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.green),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
@@ -93,8 +113,7 @@ class _LoginState extends State<Login> {
     );
   }
 
-  field(
-      IconData icon, String label, TextEditingController controller, Key key) {
+  field(IconData icon, String label, TextEditingController controller, Key key) {
     return Container(
       margin: EdgeInsets.all(10.0),
       child: TextFormField(
@@ -102,8 +121,6 @@ class _LoginState extends State<Login> {
         validator: (value) {
           if (value.isEmpty) {
             return 'this field required';
-          } else {
-            return 'ok';
           }
         },
         decoration: InputDecoration(
