@@ -1,6 +1,7 @@
 import 'package:courses/screens/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:courses/screens/bottomnavbar/bottomnavbar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -65,7 +66,7 @@ class _LoginState extends State<Login> {
                               fontSize: 20.0,
                               fontWeight: FontWeight.bold),
                         ),
-                        onPressed: () {
+                        onPressed: () async {
                           if (!_formKey.currentState.validate()) {
                             return Scaffold.of(context).showSnackBar(
                               SnackBar(
@@ -75,6 +76,8 @@ class _LoginState extends State<Login> {
                               ),
                             );
                           } else {
+                            SharedPreferences _register = await SharedPreferences.getInstance();
+                            _register.setString('email', emailController.text);
                             return Navigator.pushReplacement(context,
                                 MaterialPageRoute(builder: (_) {
                               return BottomNavBar();

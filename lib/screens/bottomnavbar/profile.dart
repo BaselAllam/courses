@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:courses/widgets/tabsitem.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 
@@ -9,6 +13,9 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+
+PickedFile pickedImage;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,10 +34,55 @@ class _ProfileState extends State<Profile> {
                     shape: BoxShape.circle,
                     border: Border.all(color: Colors.white, width: 5.0),
                     image: DecorationImage(
-                      image: AssetImage('assets/pic5.png'),
+                      image: pickedImage == null ? AssetImage('assets/pic5.png') : AssetImage(pickedImage.path),
                       fit: BoxFit.fill
                     ),
                   ),
+                  alignment: Alignment.center,
+                  child: IconButton(
+                    icon: Icon(Icons.add_a_photo),
+                    color: Colors.black,
+                    iconSize: 30.0,
+                    onPressed: () {
+                      showModalBottomSheet(
+                        context: context,
+                        shape: RoundedRectangleBorder(),
+                        backgroundColor: Colors.white,
+                        builder: (BuildContext context){
+                          return Column(
+                            children: [
+                              ListTile(
+                                title: Text('Camera',
+                                  style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 20.0,
+                                  fontWeight: FontWeight.bold
+                                  ),
+                                ),
+                                trailing: Icon(Icons.camera, color: Colors.black, size: 20.0),
+                                onTap: () {
+                                  pickImage(ImageSource.camera);
+                                }
+                              ),
+                              ListTile(
+                                title: Text('Gallery',
+                                  style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 20.0,
+                                  fontWeight: FontWeight.bold
+                                  ),
+                                ),
+                                trailing: Icon(Icons.album, color: Colors.black, size: 20.0),
+                                onTap: () {
+                                  pickImage(ImageSource.gallery);
+                                }
+                              ),
+                            ],
+                          );
+                        }
+                      );
+                    },
+                  )
                 ),
                 Align(
                   alignment: Alignment.topCenter,
@@ -53,9 +105,35 @@ class _ProfileState extends State<Profile> {
                 ),
               ],
             ),
+            Column(
+              children: [
+                FlatButton(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0)),
+                  color: Colors.black,
+                  child: Text(
+                    'logout',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  onPressed: () async {
+                    SharedPreferences _register = await SharedPreferences.getInstance();
+                    _register.clear();
+                  },
+                ),
+              ],
+            ),
           ],
         ),
       ),
     );
+  }
+  pickImage(ImageSource source) async {
+    var _pickedImage = await ImagePicker().getImage(source: source);
+    setState(() {
+      pickedImage = _pickedImage;
+    });
   }
 }
