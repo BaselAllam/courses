@@ -1,5 +1,7 @@
 import 'package:courses/screens/bottomnavbar/bottomnavbar.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 
 
@@ -29,6 +31,18 @@ class _SignUpState extends State<SignUp> {
   String gender = 'Select Gender';
 
   bool terms = false;
+
+
+  Position position;
+
+  bool isMapLoading;
+
+  @override
+  void initState() {
+    getCurrentPosition();
+    super.initState();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -69,6 +83,21 @@ class _SignUpState extends State<SignUp> {
                 }
               ),
               confimrSecure
+              ),
+              Container(
+                height: 100.0,
+                margin: EdgeInsets.all(10.0),
+                child: isMapLoading == true ? 
+                CircularProgressIndicator() :
+                 GoogleMap(
+                  initialCameraPosition: CameraPosition(
+                    target: LatLng(position.latitude, position.longitude),
+                    zoom: 12
+                  ),
+                  mapType: MapType.normal,
+                  myLocationButtonEnabled: true,
+                  myLocationEnabled: true,
+                ),
               ),
               data('Birth Date', '${pickedDate.toString().substring(0, 10)}', Icon(Icons.date_range, color: Colors.black, size: 20.0),
               () async {
@@ -269,5 +298,17 @@ class _SignUpState extends State<SignUp> {
         controller: controller,
       ),
     );
+  }
+  getCurrentLocation() async {
+
+    setState(() {
+      isMapLoading = true;
+    });
+
+    var _position = await Geolocator.getCurrentPosition();
+    setState(() {
+      position = _position;
+      isMapLoading = false;
+    });
   }
 }
