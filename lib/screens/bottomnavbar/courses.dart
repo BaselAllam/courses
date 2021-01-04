@@ -72,20 +72,14 @@ class Studying extends StatefulWidget {
 }
 
 class _StudyingState extends State<Studying> {
-
-List image = [
-  'assets/pic1.png', 'assets/pic2.png', 'assets/pic3.png',
-  'assets/pic4.png', 'assets/pic5.png', 'assets/pic6.png',
-];
-
   @override
   Widget build(BuildContext context) {
     return Container(
       child: ListView.builder(
         scrollDirection: Axis.vertical,
-        itemCount: image.length,
+        itemCount: 5,
         itemBuilder: (context, index){
-          return Item(image[index], true);
+          return Item('https://firebasestorage.googleapis.com/v0/b/courses-e83e5.appspot.com/o/images%2Fpic2.png?alt=media&token=aff63dcd-be8c-4871-970e-f2c66bc91124', true, 'title', 'description');
         },
       ),
     );
@@ -101,12 +95,6 @@ class Saved extends StatefulWidget {
 }
 
 class _SavedState extends State<Saved> {
-
-List image = [
-  'assets/pic1.png', 'assets/pic2.png', 'assets/pic3.png',
-  'assets/pic4.png', 'assets/pic5.png', 'assets/pic6.png',
-];
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -116,9 +104,9 @@ List image = [
           childAspectRatio: 0.6
         ),
         scrollDirection: Axis.vertical,
-        itemCount: image.length,
+        itemCount: 5,
         itemBuilder: (context, index){
-          return Item(image[index], false);
+          return Item('https://firebasestorage.googleapis.com/v0/b/courses-e83e5.appspot.com/o/images%2Fpic2.png?alt=media&token=aff63dcd-be8c-4871-970e-f2c66bc91124', false, 'title', 'description');
         },
       ),
     );

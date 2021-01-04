@@ -35,7 +35,7 @@ class _SignUpState extends State<SignUp> {
 
   Position position;
 
-  bool isMapLoading;
+  bool isMapLoading = true;
 
   @override
   void initState() {
@@ -88,7 +88,7 @@ class _SignUpState extends State<SignUp> {
                 height: 100.0,
                 margin: EdgeInsets.all(10.0),
                 child: isMapLoading == true ? 
-                CircularProgressIndicator() :
+                Center(child: CircularProgressIndicator()) :
                  GoogleMap(
                   initialCameraPosition: CameraPosition(
                     target: LatLng(position.latitude, position.longitude),

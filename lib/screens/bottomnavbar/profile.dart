@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:courses/screens/addCourse.dart';
 import 'package:courses/widgets/tabsitem.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -105,6 +106,21 @@ PickedFile pickedImage;
                 ),
               ],
             ),
+            FlatButton(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0)),
+                  color: Colors.black,
+                  child: Text(
+                    'Add Course',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  onPressed: () {
+                    return Navigator.push(context, MaterialPageRoute(builder: (_) {return AddCourse();}));
+                  }
+                ),
             Column(
               children: [
                 FlatButton(

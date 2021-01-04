@@ -6,8 +6,10 @@ class Item extends StatefulWidget {
 
 final String image;
 final bool studying;
+final String courseTitle;
+final String courseDescription;
 
-Item(this.image, this.studying);
+Item(this.image, this.studying, this.courseTitle, this.courseDescription);
 
   @override
   _ItemState createState() => _ItemState();
@@ -30,18 +32,18 @@ class _ItemState extends State<Item> {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(topLeft: Radius.circular(20.0), topRight: Radius.circular(20.0)),
               image: DecorationImage(
-                image: AssetImage(widget.image),
+                image: NetworkImage(widget.image),
                 fit: BoxFit.fill
               ),
             ),
             height: 150.0
           ),
           Text(
-            'Computer Science',
+            widget.courseTitle,
             style: TextStyle(color: Colors.indigo[600], fontSize: 18.0, fontWeight: FontWeight.bold, height: 2.0)
           ),
           Text(
-            'Network & Programming\nLanguages',
+            widget.courseDescription,
             style: TextStyle(color: Colors.black, fontSize: 20.0, fontWeight: FontWeight.bold, height: 1.0)
           ),
           checker()

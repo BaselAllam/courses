@@ -1,5 +1,7 @@
+import 'package:courses/models/courses/coursescontroller.dart';
 import 'package:courses/screens/splashscreen.dart';
 import 'package:flutter/material.dart';
+import 'package:scoped_model/scoped_model.dart';
 
 
 void main() => runApp(MyApp());
@@ -10,9 +12,12 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: SplashScreens(),
+    return ScopedModel(
+      model: CoursesController(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: SplashScreens(),
+      ),
     );
   }
 }

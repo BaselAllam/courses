@@ -1,6 +1,8 @@
+import 'package:courses/models/courses/coursescontroller.dart';
 import 'package:courses/screens/searchresult.dart';
 import 'package:courses/widgets/item.dart';
 import 'package:flutter/material.dart';
+import 'package:scoped_model/scoped_model.dart';
 
 
 
@@ -20,65 +22,69 @@ List image = [
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xfff4f4fb),
-      body: Container(
-        margin: EdgeInsets.all(10.0),
-        child: ListView(
-          scrollDirection: Axis.vertical,
-          children: [
-            Align(
-              alignment: Alignment.topCenter,
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 5),
-                child: Text(
-                  'Hi Bassel',
-                  style: TextStyle(color: Colors.black, fontSize: 30.0, fontWeight: FontWeight.bold)
-                ),
-              ),
-            ),
-            Align(
-              alignment: Alignment.topCenter,
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 5),
-                child: Text(
-                  'What would you like to learn\nToday... Search Below',
-                  style: TextStyle(color: Colors.grey, fontSize: 20.0, fontWeight: FontWeight.normal, fontStyle: FontStyle.italic)
-                ),
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.all(20.0),
-              padding: EdgeInsets.all(10.0),
-              color: Colors.white,
-              child: ListTile(
-                title: Text(
-                  'Ex: Flutter Course',
-                  style: TextStyle(color: Colors.black, fontSize: 20.0, fontWeight: FontWeight.normal)
-                ),
-                trailing: Container(
-                  padding: EdgeInsets.all(8.0),
-                  decoration: BoxDecoration(
-                    color: Color(0xff5369ff),
-                    borderRadius: BorderRadius.circular(5.0),
+      body: ScopedModelDescendant(
+        builder: (context, child, CoursesController model){
+          return Container(
+          margin: EdgeInsets.all(10.0),
+          child: ListView(
+            scrollDirection: Axis.vertical,
+            children: [
+              Align(
+                alignment: Alignment.topCenter,
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 5),
+                  child: Text(
+                    'Hi Bassel',
+                    style: TextStyle(color: Colors.black, fontSize: 30.0, fontWeight: FontWeight.bold)
                   ),
-                  child: Icon(Icons.search, color: Colors.white, size: 20.0)
                 ),
-                onTap: () {
-                  return Navigator.push(context, MaterialPageRoute(builder: (_){return SearchResult();}));
-                },
               ),
-            ),
-            scrollHeader('Studying'),
-            Container(
-              height: MediaQuery.of(context).size.height/2.5,
-              child: scrollItem(true),
-            ),
-            scrollHeader('New Courses'),
-            Container(
-              height: MediaQuery.of(context).size.height/2.5,
-              child: scrollItem(false),
-            ),
-          ],
-        ),
+              Align(
+                alignment: Alignment.topCenter,
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 5),
+                  child: Text(
+                    'What would you like to learn\nToday... Search Below',
+                    style: TextStyle(color: Colors.grey, fontSize: 20.0, fontWeight: FontWeight.normal, fontStyle: FontStyle.italic)
+                  ),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.all(20.0),
+                padding: EdgeInsets.all(10.0),
+                color: Colors.white,
+                child: ListTile(
+                  title: Text(
+                    'Ex: Flutter Course',
+                    style: TextStyle(color: Colors.black, fontSize: 20.0, fontWeight: FontWeight.normal)
+                  ),
+                  trailing: Container(
+                    padding: EdgeInsets.all(8.0),
+                    decoration: BoxDecoration(
+                      color: Color(0xff5369ff),
+                      borderRadius: BorderRadius.circular(5.0),
+                    ),
+                    child: Icon(Icons.search, color: Colors.white, size: 20.0)
+                  ),
+                  onTap: () {
+                    return Navigator.push(context, MaterialPageRoute(builder: (_){return SearchResult(model);}));
+                  },
+                ),
+              ),
+              scrollHeader('Studying'),
+              Container(
+                height: MediaQuery.of(context).size.height/2.5,
+                child: scrollItem(true),
+              ),
+              scrollHeader('New Courses'),
+              Container(
+                height: MediaQuery.of(context).size.height/2.5,
+                child: scrollItem(false),
+              ),
+            ],
+          ),
+        );
+        }
       ),
     );
   }
@@ -95,7 +101,7 @@ List image = [
       scrollDirection: Axis.horizontal,
       itemCount: image.length,
       itemBuilder: (context, index){
-        return Item(image[index], studying);
+        return Item('https://firebasestorage.googleapis.com/v0/b/courses-e83e5.appspot.com/o/images%2Fpic2.png?alt=media&token=aff63dcd-be8c-4871-970e-f2c66bc91124', studying, 'title', 'description');
       },
     );
   }  
