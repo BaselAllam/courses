@@ -1,3 +1,4 @@
+import 'package:courses/responsive/responsiveprofile.dart';
 import 'package:flutter/material.dart';
 
 
@@ -29,15 +30,15 @@ class _TabsItemState extends State<TabsItem> {
         children: [
           Text(
             widget.titles[0],
-            style: TextStyle(color: Colors.black, fontSize: 20.0, fontWeight: FontWeight.normal)
+            style: TextStyle(color: Colors.black, fontSize: responsiveProfileItem(MediaQuery.of(context)), fontWeight: FontWeight.normal)
           ),
           Text(
             widget.titles[1],
-            style: TextStyle(color: Colors.black, fontSize: 20.0, fontWeight: FontWeight.normal)
+            style: TextStyle(color: Colors.black, fontSize: responsiveProfileItem(MediaQuery.of(context)), fontWeight: FontWeight.normal)
           ),
           Text(
             widget.titles[2],
-            style: TextStyle(color: Colors.black, fontSize: 20.0, fontWeight: FontWeight.normal)
+            style: TextStyle(color: Colors.black, fontSize: responsiveProfileItem(MediaQuery.of(context)), fontWeight: FontWeight.normal)
           ),
         ],
       ),

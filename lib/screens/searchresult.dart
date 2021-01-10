@@ -61,10 +61,11 @@ void dispose() {
                 itemCount: model.allCourses.length,
                 itemBuilder: (context, index){
                   return Item(
-                    model.allCourses[index].courseImage,
+                    'https://firebasestorage.googleapis.com/v0/b/courses-e83e5.appspot.com/o/images%2Fpic2.png?alt=media&token=aff63dcd-be8c-4871-970e-f2c66bc91124',
                     true,
                     model.allCourses[index].courseTitle,
-                    model.allCourses[index].courseDescription
+                    model.allCourses[index].courseDescription,
+                    model.allCourses[index].id
                   );
                 },
               ),

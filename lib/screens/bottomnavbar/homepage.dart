@@ -1,4 +1,5 @@
 import 'package:courses/models/courses/coursescontroller.dart';
+import 'package:courses/responsive/responsivehomepage.dart';
 import 'package:courses/screens/searchresult.dart';
 import 'package:courses/widgets/item.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +21,7 @@ List image = [
 
   @override
   Widget build(BuildContext context) {
+    print(MediaQuery.of(context).size.height);
     return Scaffold(
       backgroundColor: Color(0xfff4f4fb),
       body: ScopedModelDescendant(
@@ -73,12 +75,12 @@ List image = [
               ),
               scrollHeader('Studying'),
               Container(
-                height: MediaQuery.of(context).size.height/2.5,
+                height: responsiveHomeScrollItem(MediaQuery.of(context)),
                 child: scrollItem(true),
               ),
               scrollHeader('New Courses'),
               Container(
-                height: MediaQuery.of(context).size.height/2.5,
+                height: responsiveHomeScrollItem(MediaQuery.of(context)),
                 child: scrollItem(false),
               ),
             ],
@@ -101,7 +103,7 @@ List image = [
       scrollDirection: Axis.horizontal,
       itemCount: image.length,
       itemBuilder: (context, index){
-        return Item('https://firebasestorage.googleapis.com/v0/b/courses-e83e5.appspot.com/o/images%2Fpic2.png?alt=media&token=aff63dcd-be8c-4871-970e-f2c66bc91124', studying, 'title', 'description');
+        return Item('https://firebasestorage.googleapis.com/v0/b/courses-e83e5.appspot.com/o/images%2Fpic2.png?alt=media&token=aff63dcd-be8c-4871-970e-f2c66bc91124', studying, 'title', 'description', '');
       },
     );
   }  

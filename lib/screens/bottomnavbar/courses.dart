@@ -1,3 +1,4 @@
+import 'package:courses/responsive/responsiveprofile.dart';
 import 'package:courses/widgets/item.dart';
 import 'package:flutter/material.dart';
 
@@ -79,7 +80,7 @@ class _StudyingState extends State<Studying> {
         scrollDirection: Axis.vertical,
         itemCount: 5,
         itemBuilder: (context, index){
-          return Item('https://firebasestorage.googleapis.com/v0/b/courses-e83e5.appspot.com/o/images%2Fpic2.png?alt=media&token=aff63dcd-be8c-4871-970e-f2c66bc91124', true, 'title', 'description');
+          return Item('https://firebasestorage.googleapis.com/v0/b/courses-e83e5.appspot.com/o/images%2Fpic2.png?alt=media&token=aff63dcd-be8c-4871-970e-f2c66bc91124', true, 'title', 'description', '');
         },
       ),
     );
@@ -101,12 +102,12 @@ class _SavedState extends State<Saved> {
       child: GridView.builder(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          childAspectRatio: 0.6
+          childAspectRatio: responsiveCoursesGridItem(MediaQuery.of(context)),
         ),
         scrollDirection: Axis.vertical,
         itemCount: 5,
         itemBuilder: (context, index){
-          return Item('https://firebasestorage.googleapis.com/v0/b/courses-e83e5.appspot.com/o/images%2Fpic2.png?alt=media&token=aff63dcd-be8c-4871-970e-f2c66bc91124', false, 'title', 'description');
+          return Item('https://firebasestorage.googleapis.com/v0/b/courses-e83e5.appspot.com/o/images%2Fpic2.png?alt=media&token=aff63dcd-be8c-4871-970e-f2c66bc91124', false, 'title', 'description', '');
         },
       ),
     );

@@ -1,4 +1,6 @@
+import 'package:courses/models/courses/coursescontroller.dart';
 import 'package:flutter/material.dart';
+import 'package:scoped_model/scoped_model.dart';
 
 
 
@@ -8,8 +10,9 @@ final String image;
 final bool studying;
 final String courseTitle;
 final String courseDescription;
+final String id;
 
-Item(this.image, this.studying, this.courseTitle, this.courseDescription);
+Item(this.image, this.studying, this.courseTitle, this.courseDescription, this.id);
 
   @override
   _ItemState createState() => _ItemState();
@@ -18,37 +21,47 @@ Item(this.image, this.studying, this.courseTitle, this.courseDescription);
 class _ItemState extends State<Item> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20.0),
-        color: Colors.white,
-      ),
-      margin: EdgeInsets.all(10.0),
-      width: 250.0,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
+    return ScopedModelDescendant(
+      builder: (context, child, CoursesController model){
+        return InkWell(
+          onLongPress: () {
+            model.getCourseId(widget.id);
+            model.deleteCourse();
+          },
+          child: Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(topLeft: Radius.circular(20.0), topRight: Radius.circular(20.0)),
-              image: DecorationImage(
-                image: NetworkImage(widget.image),
-                fit: BoxFit.fill
-              ),
+              borderRadius: BorderRadius.circular(20.0),
+              color: Colors.white,
             ),
-            height: 150.0
+            margin: EdgeInsets.all(10.0),
+            width: 250.0,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(topLeft: Radius.circular(20.0), topRight: Radius.circular(20.0)),
+                    image: DecorationImage(
+                      image: NetworkImage(widget.image),
+                      fit: BoxFit.fill
+                    ),
+                  ),
+                  height: 150.0
+                ),
+                Text(
+                  widget.courseTitle,
+                  style: TextStyle(color: Colors.indigo[600], fontSize: 18.0, fontWeight: FontWeight.bold, height: 2.0)
+                ),
+                Text(
+                  widget.courseDescription,
+                  style: TextStyle(color: Colors.black, fontSize: 20.0, fontWeight: FontWeight.bold, height: 1.0)
+                ),
+                checker()
+              ],
+            ),
           ),
-          Text(
-            widget.courseTitle,
-            style: TextStyle(color: Colors.indigo[600], fontSize: 18.0, fontWeight: FontWeight.bold, height: 2.0)
-          ),
-          Text(
-            widget.courseDescription,
-            style: TextStyle(color: Colors.black, fontSize: 20.0, fontWeight: FontWeight.bold, height: 1.0)
-          ),
-          checker()
-        ],
-      ),
+        );
+      }
     );
   }
   checker() {
